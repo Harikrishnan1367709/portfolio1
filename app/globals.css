@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-bg: #000000;
+  --secondary-bg: #0B0B0B;
+  --section-bg: #111111;
+  --card-bg: #161616;
+  --primary-text: #FFFFFF;
+  --secondary-text: #B3B3B3;
+  --muted-text: #6B6B6B;
+  --borders: #222222;
+  --accent: #FFFFFF;
+  --button-hover: #E5E5E5;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 8.6%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 4.3%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 13.3%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 42%;
+    --muted-foreground: 0 0% 70%;
+    --accent: 0 0% 100%;
+    --accent-foreground: 0 0% 0%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 13.3%;
+    --input: 0 0% 13.3%;
+    --ring: 0 0% 100%;
+    --radius: 1rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-[#000000] text-[#FFFFFF] font-['Plus_Jakarta_Sans',sans-serif];
+    font-weight: 400;
+    line-height: 1.5;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold;
+  }
+
+  h1 {
+    @apply text-[40px] md:text-[64px] leading-tight;
+  }
+
+  h2 {
+    @apply text-[32px] md:text-[40px] leading-tight;
+  }
+
+  h3 {
+    @apply text-[24px] leading-tight;
+  }
+
+  p {
+    @apply text-[16px] leading-relaxed;
+  }
+
+  button {
+    @apply font-medium;
+  }
+}
+
+@layer utilities {
+  .section-padding {
+    @apply py-[60px] md:py-[120px];
+  }
+
+  .container-custom {
+    @apply max-w-[1200px] mx-auto px-6;
+  }
+
+  .grid-gap {
+    @apply gap-8;
+  }
+
+  .card-border-radius {
+    @apply rounded-2xl;
+  }
+
+  .transition-smooth {
+    @apply transition-all duration-300 ease-in-out;
+  }
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #FFFFFF 0%, #B3B3B3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hover-lift {
+  transition: transform 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px);
+}
+
+.navbar-blur {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.smooth-scroll {
+  scroll-behavior: smooth;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
