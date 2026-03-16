@@ -26,7 +26,6 @@ const Navbar = () => {
     { name: 'Projects', href: '/projects' },
     { name: 'About Us', href: '/about' },
     { name: 'Careers', href: '/careers' },
-    { name: 'Blogs', href: '/blogs' },
     { name: 'Contact Us', href: '/contact' },
   ];
 
@@ -39,14 +38,15 @@ const Navbar = () => {
       }`}
     >
       <div className="container-custom">
-        <div className="flex items-center justify-between h-[72px]">
+        <div className="flex items-center justify-between h-[92px]">
           <Link href="/" className="flex items-center space-x-3">
             <Image
               src="/Logo_Design_for_Jawanexis.png"
               alt="Jawanexis Technologies"
-              width={180}
-              height={40}
-              className="h-10 w-auto"
+              width={320}
+              height={74}
+              priority
+              className="h-auto w-[150px] md:w-[240px] lg:w-[310px]"
             />
           </Link>
 
