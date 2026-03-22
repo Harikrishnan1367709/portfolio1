@@ -1,19 +1,20 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 const ClientLogos = () => {
   const clients = [
-    'TechStart Inc',
-    'Innovation Labs',
-    'Digital Ventures',
-    'Global Finance Corp',
-    'MedTech Solutions',
-    'RetailHub Inc',
+    { name: 'Revamp', src: '/logo/revamp.png' },
+    { name: 'Alphaspects', src: '/logo/alphaspects.png' },
+    { name: 'Neotouch', src: '/logo/neotouch.png' },
+    { name: 'Opsmonsters', src: '/logo/opsmonsters.png' },
+    { name: 'Jawa Edtech', src: '/logo/jawaedtech.png' },
+    { name: 'Queueless', src: '/logo/queue.png' },
   ];
 
   return (
-    <section className="py-16 bg-[#0B0B0B] border-y border-[#222222]">
+    <section className="pt-5 pb-16 bg-[#0B0B0B] border-y border-[#222222]">
       <div className="container-custom">
         <motion.p
           initial={{ opacity: 0 }}
@@ -27,7 +28,7 @@ const ClientLogos = () => {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
           {clients.map((client, index) => (
             <motion.div
-              key={client}
+              key={client.name}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -35,9 +36,13 @@ const ClientLogos = () => {
               whileHover={{ scale: 1.05, opacity: 1 }}
               className="flex items-center justify-center p-6 border border-[#222222] rounded-lg opacity-50 hover:opacity-100 transition-all duration-300 cursor-pointer"
             >
-              <span className="text-[#B3B3B3] font-semibold text-sm text-center">
-                {client}
-              </span>
+              <Image
+                src={client.src}
+                alt={client.name}
+                width={180}
+                height={56}
+                className="h-10 w-full object-contain"
+              />
             </motion.div>
           ))}
         </div>

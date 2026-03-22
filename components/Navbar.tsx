@@ -1,18 +1,38 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [scrollStage, setScrollStage] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const lastScrollYRef = useRef(0);
+  const mergeTransition = { type: 'spring' as const, stiffness: 220, damping: 24, mass: 0.9 };
+  const isTextHidden = scrollStage >= 1;
+  const isCompact = scrollStage >= 2;
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const y = window.scrollY;
+      const isScrollingDown = y > lastScrollYRef.current;
+
+      // Downward: 0 -> 1 -> 2. Upward: keep compact until near top, then 0.
+      if (isScrollingDown) {
+        if (y > 140) {
+          setScrollStage(2);
+        } else if (y > 60) {
+          setScrollStage(1);
+        } else {
+          setScrollStage(0);
+        }
+      } else if (y < 30) {
+        setScrollStage(0);
+      }
+
+      lastScrollYRef.current = y;
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -20,57 +40,139 @@ const Navbar = () => {
   }, []);
 
   const menuItems = [
-    { name: 'Home', href: '/' },
     { name: 'Services', href: '/services' },
     { name: 'Clients', href: '/clients' },
     { name: 'Projects', href: '/projects' },
     { name: 'About Us', href: '/about' },
     { name: 'Careers', href: '/careers' },
-    { name: 'Contact Us', href: '/contact' },
   ];
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-[#000000] border-b border-[#222222] navbar-blur'
-          : 'bg-transparent'
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent"
     >
       <div className="container-custom">
-        <div className="flex items-center justify-between h-[92px]">
-          <Link href="/" className="flex items-center space-x-3">
-            <Image
-              src="/Logo_Design_for_Jawanexis.png"
-              alt="Jawanexis Technologies"
-              width={320}
-              height={74}
-              priority
-              className="h-auto w-[150px] md:w-[240px] lg:w-[310px]"
-            />
-          </Link>
+        <motion.div
+          className="flex items-center"
+          initial={{
+            height: 92,
+            paddingLeft: 0,
+            paddingRight: 0,
+            marginTop: 0,
+            maxWidth: '100%',
+            marginLeft: 0,
+            marginRight: 0,
+            backgroundColor: 'rgba(0,0,0,0)',
+            borderRadius: 0,
+            borderWidth: 0,
+            borderColor: 'transparent',
+            borderStyle: 'solid',
+            justifyContent: 'space-between',
+          }}
+          animate={isCompact ? {
+            height: 52,
+            paddingLeft: 20,
+            paddingRight: 20,
+            marginTop: 8,
+            maxWidth: 820,
+            width: 'calc(100% - 24px)',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            backgroundColor: 'rgba(5,5,5,0.95)',
+            borderRadius: 8,
+            borderWidth: 1,
+            borderColor: '#2A2A2A',
+            borderStyle: 'solid',
+            justifyContent: 'space-between',
+          } : {
+            height: 92,
+            paddingLeft: 0,
+            paddingRight: 0,
+            marginTop: 0,
+            maxWidth: '100%',
+            width: '100%',
+            marginLeft: 0,
+            marginRight: 0,
+            backgroundColor: 'rgba(0,0,0,0)',
+            borderRadius: 0,
+            borderWidth: 0,
+            borderColor: 'transparent',
+            borderStyle: 'solid',
+            justifyContent: 'space-between',
+          }}
+          transition={{ duration: 0.15, ease: [0.4, 0, 0.2, 1] }}
+        >
+          <motion.div
+            className={isCompact ? 'lg:w-1/3 lg:flex lg:justify-start' : ''}
+            animate={{ scale: isCompact ? 0.95 : 1 }}
+            transition={mergeTransition}
+          >
+            <Link href="/" className="flex items-center">
+              <motion.div
+                className="flex items-center overflow-hidden"
+                animate={{ columnGap: isCompact ? 0 : 12 }}
+                transition={{ duration: 0.45, ease: [0.4, 0, 0.2, 1] }}
+              >
+                <Image
+                  src="/Logo_Design_for_Jawanexis.png"
+                  alt="Jawanexis Technologies"
+                  width={52}
+                  height={52}
+                  priority
+                  className={`object-contain transition-all duration-300 ${
+                    isCompact ? 'h-8 w-8 md:h-9 md:w-9' : 'h-10 w-10 md:h-12 md:w-12'
+                  }`}
+                />
 
-          <div className="hidden lg:flex items-center space-x-8">
+                <motion.span
+                  className="text-white font-semibold text-base md:text-lg whitespace-nowrap overflow-hidden block"
+                  animate={{
+                    opacity: isTextHidden ? 0 : 1,
+                    width: isCompact ? 0 : 160,
+                  }}
+                  initial={{ opacity: 1, width: 160 }}
+                  transition={{ duration: 0.45, ease: [0.4, 0, 0.2, 1] }}
+                >
+                  Jawanexis
+                </motion.span>
+              </motion.div>
+            </Link>
+          </motion.div>
+
+          <motion.div
+            className={`hidden lg:flex items-center transition-all duration-300 ${
+              isCompact ? 'lg:w-1/3 justify-center gap-8' : 'space-x-8'
+            }`}
+            transition={mergeTransition}
+          >
             {menuItems.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-[#FFFFFF] hover:text-[#B3B3B3] transition-colors duration-300 relative group text-sm font-medium"
+                className={`text-[#FFFFFF] hover:text-[#B3B3B3] transition-colors duration-300 relative group font-medium ${
+                  isCompact ? 'text-sm whitespace-nowrap' : 'text-sm'
+                }`}
               >
                 {item.name}
                 <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-white transition-all duration-300 group-hover:w-full"></span>
               </Link>
             ))}
-          </div>
+          </motion.div>
 
-          <div className="hidden lg:block">
+          <motion.div
+            className={`hidden lg:flex ${isCompact ? 'lg:w-1/3 justify-end' : ''}`}
+            animate={{ scale: isCompact ? 0.94 : 1 }}
+            transition={mergeTransition}
+          >
             <Link
               href="/contact"
-              className="bg-white text-black px-6 py-3 rounded-lg hover:bg-[#E5E5E5] transition-all duration-300 text-sm font-medium"
+              className={`inline-flex items-center justify-center bg-white text-black rounded-lg hover:bg-[#E5E5E5] transition-all duration-300 font-medium ${
+                isCompact ? 'px-4 py-2 text-sm' : 'px-6 py-3 text-sm'
+              }`}
             >
               Start a Project
             </Link>
-          </div>
+          </motion.div>
 
           <button
             className="lg:hidden text-white"
@@ -79,7 +181,7 @@ const Navbar = () => {
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
-        </div>
+        </motion.div>
       </div>
 
       <AnimatePresence>

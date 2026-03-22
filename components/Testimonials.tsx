@@ -7,24 +7,24 @@ import { ChevronLeft, ChevronRight, Star, Quote } from 'lucide-react';
 const Testimonials = () => {
   const testimonials = [
     {
-      quote: 'Jawanexis Technologies delivered beyond our expectations. Their technical expertise and commitment to quality helped us launch our product ahead of schedule.',
-      name: 'Sarah Johnson',
-      position: 'CTO',
-      company: 'TechStart Inc',
+      quote: 'Revamp completely redefined our brand visuals. The colorful leaf logo and creative approach really captured our identity. Working with their team was smooth and professional.',
+      name: 'Revamp',
+      position: 'Client',
+      company: 'Revamp',
       rating: 5,
     },
     {
-      quote: 'Working with Jawanexis has been a game-changer for our business. They understand both technology and business needs perfectly.',
-      name: 'Michael Chen',
-      position: 'Product Manager',
-      company: 'Innovation Labs',
+      quote: 'Alphaspects\' geometric logo and modern design language elevated our digital presence. The team was responsive and delivered a high-quality product on time.',
+      name: 'Alphaspects',
+      position: 'Client',
+      company: 'Alphaspects',
       rating: 5,
     },
     {
-      quote: 'The team at Jawanexis is highly professional and responsive. They transformed our vision into a beautiful, functional product.',
-      name: 'Emily Rodriguez',
-      position: 'CEO',
-      company: 'Digital Ventures',
+      quote: 'Neotouch\'s web platform was built seamlessly. The combination of their technical expertise and design sense gave us a product our users love.',
+      name: 'Neotouch',
+      position: 'Client',
+      company: 'Neotouch',
       rating: 5,
     },
   ];

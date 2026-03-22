@@ -1,39 +1,52 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Palette, Code, Smartphone, Server, CircleCheck as CheckCircle, TrendingUp } from 'lucide-react';
+import Link from 'next/link';
+import { ArrowRight, Code, Smartphone, Server, Globe, Link2, CircleCheck as CheckCircle, Users } from 'lucide-react';
 
 const Services = () => {
   const services = [
     {
-      icon: Palette,
-      title: 'Experience Design',
-      description: 'Creating intuitive and engaging user experiences that delight customers and drive business results through research-driven design.',
-    },
-    {
+      slug: 'full-stack-development',
       icon: Code,
-      title: 'Frontend Development',
-      description: 'Building responsive, performant, and accessible web applications using modern frameworks like React, Next.js, and Vue.js.',
+      title: 'Full Stack Development',
+      description: 'End-to-end web solutions for startups, SaaS, and enterprises.',
     },
     {
+      slug: 'mobile-app-development',
       icon: Smartphone,
-      title: 'Mobile Development',
-      description: 'Developing native and cross-platform mobile applications for iOS and Android with seamless user experiences.',
+      title: 'Mobile App Development',
+      description: 'High-performance native and cross-platform apps for iOS and Android.',
     },
     {
+      slug: 'web-application-development',
       icon: Server,
-      title: 'Backend Development',
-      description: 'Creating robust, scalable server-side solutions with Node.js, Express, and modern database technologies.',
+      title: 'Web Application Development',
+      description: 'Scalable, secure platforms for business and enterprise needs.',
     },
     {
+      slug: 'website-development',
+      icon: Globe,
+      title: 'Website Development',
+      description: 'SEO-friendly, responsive websites for startups and enterprises.',
+    },
+    {
+      slug: 'mulesoft-api-integration',
+      icon: Link2,
+      title: 'MuleSoft API Integration',
+      description: 'Connect systems and streamline business operations.',
+    },
+    {
+      slug: 'quality-engineering-testing',
       icon: CheckCircle,
-      title: 'QA Testing',
-      description: 'Ensuring software quality through comprehensive testing strategies including automation, performance, and security testing.',
+      title: 'Quality Engineering & Testing',
+      description: 'Secure, reliable, and high-performance software QA.',
     },
     {
-      icon: TrendingUp,
-      title: 'Digital Marketing',
-      description: 'Driving growth through data-driven marketing strategies, SEO optimization, and performance analytics.',
+      slug: 'it-resource-staffing',
+      icon: Users,
+      title: 'IT Resource Staffing',
+      description: 'Flexible, skilled tech teams for short or long-term projects.',
     },
   ];
 
@@ -87,18 +100,51 @@ const Services = () => {
             <motion.div
               key={service.title}
               variants={itemVariants}
-              whileHover={{ y: -8 }}
-              className="group bg-[#161616] border border-[#222222] rounded-2xl p-8 transition-all duration-300 hover:border-white cursor-pointer"
+              initial="rest"
+              animate="rest"
+              whileHover="hover"
+              className="group bg-[#161616] border border-[#222222] rounded-2xl p-8 transition-all duration-300 hover:border-white"
             >
-              <div className="w-14 h-14 bg-white rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+              <motion.div
+                className="w-14 h-14 bg-white rounded-xl flex items-center justify-center mb-6"
+                variants={{
+                  rest: {
+                    scale: 1,
+                    rotate: 0,
+                    y: [0, -3, 0],
+                    transition: {
+                      duration: 2.4,
+                      repeat: Infinity,
+                      ease: 'easeInOut',
+                      delay: index * 0.08,
+                    },
+                  },
+                  hover: {
+                    y: -8,
+                    scale: 1.12,
+                    rotate: [0, -10, 10, 0],
+                    transition: {
+                      duration: 0.6,
+                      ease: 'easeInOut',
+                    },
+                  },
+                }}
+              >
                 <service.icon className="text-black" size={28} />
-              </div>
+              </motion.div>
               <h3 className="text-white font-semibold text-xl mb-3">
                 {service.title}
               </h3>
               <p className="text-[#B3B3B3] leading-relaxed">
                 {service.description}
               </p>
+              <Link
+                href={`/services/${service.slug}`}
+                className="mt-6 inline-flex items-center text-white font-medium hover:text-[#E5E5E5] transition-colors"
+              >
+                View Details
+                <ArrowRight className="ml-2" size={18} />
+              </Link>
             </motion.div>
           ))}
         </motion.div>
