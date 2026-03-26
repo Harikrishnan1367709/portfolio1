@@ -55,19 +55,17 @@ const Navbar = () => {
     >
       <div className="container-custom">
         <motion.div
-          className="flex items-center"
+          className="mx-auto flex items-center"
           initial={{
             height: 92,
             paddingLeft: 0,
             paddingRight: 0,
             marginTop: 0,
             maxWidth: '100%',
-            marginLeft: 0,
-            marginRight: 0,
             backgroundColor: 'rgba(0,0,0,0)',
             borderRadius: 0,
             borderWidth: 0,
-            borderColor: 'transparent',
+            borderColor: 'rgba(42,42,42,0)',
             borderStyle: 'solid',
             justifyContent: 'space-between',
           }}
@@ -78,12 +76,10 @@ const Navbar = () => {
             marginTop: 8,
             maxWidth: 820,
             width: 'calc(100% - 24px)',
-            marginLeft: 'auto',
-            marginRight: 'auto',
             backgroundColor: 'rgba(5,5,5,0.95)',
             borderRadius: 8,
             borderWidth: 1,
-            borderColor: '#2A2A2A',
+            borderColor: 'rgba(42,42,42,1)',
             borderStyle: 'solid',
             justifyContent: 'space-between',
           } : {
@@ -93,12 +89,10 @@ const Navbar = () => {
             marginTop: 0,
             maxWidth: '100%',
             width: '100%',
-            marginLeft: 0,
-            marginRight: 0,
             backgroundColor: 'rgba(0,0,0,0)',
             borderRadius: 0,
             borderWidth: 0,
-            borderColor: 'transparent',
+            borderColor: 'rgba(42,42,42,0)',
             borderStyle: 'solid',
             justifyContent: 'space-between',
           }}
