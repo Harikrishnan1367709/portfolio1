@@ -1,6 +1,7 @@
 export type ProjectSection = {
   title: string;
   points: string[];
+  imageAfter?: string;
 };
 
 export type ProjectCaseStudy = {
@@ -54,6 +55,7 @@ export const PROJECT_CASE_STUDIES: ProjectCaseStudy[] = [
           'The platform follows a microservices-based architecture, enabling independent development, deployment, and scaling of services. This improves resilience and availability because individual components can be updated or scaled without impacting the full system.',
           'The backend is composed of distributed Node.js services for authentication, data processing, and reporting. Real-time communication is powered by WebSockets, while Redis caching reduces latency for frequently accessed data. The solution is deployed on AWS cloud infrastructure for scalability, reliability, and cost efficiency, and uses a carefully designed multi-tenant database schema to ensure secure data isolation.',
         ],
+        imageAfter: '/projects/project1(4).png',
       },
       {
         title: 'Experience & Interaction Design',
@@ -75,6 +77,7 @@ export const PROJECT_CASE_STUDIES: ProjectCaseStudy[] = [
           'Data visualization was treated as a storytelling layer, not just a reporting layer. Information was organized hierarchically to guide users from KPI summaries to deeper analytics. Color-coded indicators highlight trends, risk signals, and opportunities, making insights easier to interpret at a glance.',
           'Dynamic line, bar, and pie visualizations update in real time, while custom report generation allows users to build context-specific outputs aligned to operational needs.',
         ],
+        imageAfter: '/projects/project1(3).jpg',
       },
       {
         title: 'Responsive & Accessibility Design',
@@ -82,6 +85,7 @@ export const PROJECT_CASE_STUDIES: ProjectCaseStudy[] = [
           'The platform was designed with a responsive-first approach. While primarily optimized for large desktop dashboards, it adapts effectively to tablet workflows so business users can access key insights on the go.',
           'Accessibility-focused decisions included readable typography, consistent spacing systems, and a structured 12-column grid that supports clarity, rhythm, and scanability across dense data surfaces.',
         ],
+        imageAfter: '/projects/project1(2).png',
       },
       {
         title: 'Security & Compliance',
