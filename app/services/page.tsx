@@ -23,6 +23,7 @@ type ServiceCardData = {
   title: string;
   description?: string;
   tech: string[];
+  slug?: string;
 };
 
 type ServiceSectionData = {
@@ -130,12 +131,14 @@ const serviceSections: ServiceSectionData[] = [
     cards: [
       {
         icon: Globe,
+        slug: 'web-application-development',
         title: 'Expertise',
         description: 'Delivering advanced web solutions tailored to complex business requirements and workflows. Focused on building scalable platforms that enhance efficiency, automation, and user experience.',
         tech: ['SaaS Product Development', 'Enterprise Platforms', 'CRM & ERP Systems', 'Customer Portals', 'Workflow Automation', 'BI Dashboards'],
       },
       {
         icon: Globe,
+        slug: 'web-application-development',
         title: 'Technologies',
         description: 'Leveraging modern tools and frameworks to build high-performance and scalable applications. Ensuring reliability, flexibility, and seamless integration across digital platforms.',
         tech: ['React.js', 'Next.js', 'Node.js', 'Express.js', 'MongoDB', 'PostgreSQL', 'AWS'],
@@ -148,12 +151,14 @@ const serviceSections: ServiceSectionData[] = [
     cards: [
       {
         icon: Globe,
+        slug: 'website-development',
         title: 'Types of Websites',
         description: 'Creating tailored website solutions designed to meet diverse business goals and user needs. From corporate platforms to startup launches, ensuring performance, scalability, and strong digital presence.',
         tech: ['Corporate Websites', 'Business Websites', 'Startup Landing Pages', 'Portfolio Websites', 'E-commerce Websites', 'Custom CMS Websites'],
       },
       {
         icon: Globe,
+        slug: 'website-development',
         title: 'Technologies',
         description: 'Utilizing modern development tools and frameworks to deliver fast, secure, and scalable websites. Ensuring flexibility, seamless integration, and long-term performance.',
         tech: ['Next.js', 'React.js', 'WordPress', 'Headless CMS', 'Shopify', 'Webflow'],
@@ -166,6 +171,7 @@ const serviceSections: ServiceSectionData[] = [
     cards: [
       {
         icon: Workflow,
+        slug: 'mulesoft-api-integration',
         title: 'Services',
         tech: ['MuleSoft API Development', 'API-led Connectivity', 'Enterprise Integration', 'Cloud Integration', 'Legacy Modernization', 'Salesforce Integration', 'API Gateway'],
       },
@@ -177,12 +183,14 @@ const serviceSections: ServiceSectionData[] = [
     cards: [
       {
         icon: TestTube2,
+        slug: 'quality-engineering-testing',
         title: 'Testing Services',
         description: 'Ensuring application quality through comprehensive testing strategies across functionality, performance, and security. Focused on delivering stable, reliable, and high-performing software experiences.',
         tech: ['Functional Testing', 'Automation Testing', 'Performance Testing', 'Security Testing', 'API Testing', 'Regression Testing', 'Mobile Testing'],
       },
       {
         icon: TestTube2,
+        slug: 'quality-engineering-testing',
         title: 'Tools',
         description: 'Utilizing modern testing frameworks and automation tools to enhance accuracy and efficiency. Enabling faster releases with consistent quality and reduced manual effort.',
         tech: ['Selenium', 'Cypress', 'Playwright', 'JUnit', 'TestNG', 'Postman'],
@@ -195,18 +203,21 @@ const serviceSections: ServiceSectionData[] = [
     cards: [
       {
         icon: Users,
+        slug: 'it-resource-staffing',
         title: 'Engagement Models',
         description: 'Flexible collaboration approaches designed to match project requirements and business goals. Supporting predictable delivery, adaptability, and efficient resource utilization.',
         tech: ['Fixed Bid', 'Time & Material', 'Staff Augmentation'],
       },
       {
         icon: Users,
+        slug: 'it-resource-staffing',
         title: 'Details',
         description: 'Structured workflows and agile methodologies that ensure transparency and timely delivery. Focused on scalability, efficiency, and continuous improvement throughout the development cycle.',
         tech: ['Predictable timelines', 'Agile process', 'Scalable workforce', 'Specialized talent'],
       },
       {
         icon: Users,
+        slug: 'it-resource-staffing',
         title: 'Resources',
         description: 'Access to skilled professionals across various domains to support your development needs. Ensuring the right expertise is available to accelerate project success.',
         tech: ['Full Stack Developers', 'Frontend Developers', 'Backend Developers', 'MuleSoft Developers', 'Mobile Developers', 'QA Engineers', 'DevOps Engineers'],
@@ -215,8 +226,22 @@ const serviceSections: ServiceSectionData[] = [
   },
 ];
 
-function ServiceCard({ icon: Icon, title, description, tech }: ServiceCardData) {
-  const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+function ServiceCard({ icon: Icon, title, description, tech, slug }: ServiceCardData) {
+  const sectionSlugMapping: Record<string, string> = {
+    'Expertise': 'web-application-development',
+    'Technologies': 'web-application-development',
+    'Native Development': 'mobile-app-development',
+    'Cross Platform': 'mobile-app-development',
+    'Backend Services': 'mobile-app-development',
+    'Applications': 'mobile-app-development',
+    'Frontend Development': 'full-stack-development',
+    'Backend Development': 'full-stack-development',
+    'Database Technologies': 'full-stack-development',
+    'Cloud & DevOps': 'full-stack-development',
+  };
+
+  const fallbackSlug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  const targetSlug = slug ?? sectionSlugMapping[title] ?? fallbackSlug;
 
   return (
     <div className="bg-[#111] border border-zinc-800 rounded-xl p-6 h-full flex flex-col justify-between transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg">
@@ -226,7 +251,7 @@ function ServiceCard({ icon: Icon, title, description, tech }: ServiceCardData) 
         {description && <p className="text-gray-400 text-sm leading-relaxed">{description}</p>}
       </div>
 
-      <a href={`/services/${slug}`} className="text-cyan-400 font-medium hover:text-cyan-300 mt-4">
+      <a href={`/services/${targetSlug}`} className="text-cyan-400 font-medium hover:text-cyan-300 mt-4">
         Learn More →
       </a>
     </div>
