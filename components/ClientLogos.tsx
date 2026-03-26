@@ -3,14 +3,14 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
+// add the clients here
 const ClientLogos = () => {
   const clients = [
-    { name: 'Revamp', src: '/logo/revamp.png' },
-    { name: 'Alphaspects', src: '/logo/alphaspects.png' },
-    { name: 'Neotouch', src: '/logo/neotouch.png' },
-    { name: 'Opsmonsters', src: '/logo/opsmonsters.png' },
-    { name: 'Jawa Edtech', src: '/logo/jawaedtech.png' },
-    { name: 'Queueless', src: '/logo/queue.png' },
+    { name: 'Revamppayment gateway integration (trust)', src: '/logo/revamp.png' },
+    { name: 'ALPHASPECTS-CRM', src: '/logo/alphaspects.png' },
+    { name: 'NEOTOUCH', src: '/logo/neotouch.png' },
+    { name: 'JAWA EDTECH -lms', src: '/logo/jawaedtech.png' },
+    { name: 'queue LESS-website', src: '/logo/queue.png' },
   ];
 
   return (

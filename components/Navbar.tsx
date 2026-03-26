@@ -3,12 +3,14 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
   const [scrollStage, setScrollStage] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
   const lastScrollYRef = useRef(0);
   const mergeTransition = { type: 'spring' as const, stiffness: 220, damping: 24, mass: 0.9 };
   const isTextHidden = scrollStage >= 1;
@@ -124,17 +126,23 @@ const Navbar = () => {
                   }`}
                 />
 
-                <motion.span
-                  className="text-white font-semibold text-base md:text-lg whitespace-nowrap overflow-hidden block"
+                <motion.div
+                  className="whitespace-nowrap overflow-hidden block"
                   animate={{
                     opacity: isTextHidden ? 0 : 1,
-                    width: isCompact ? 0 : 160,
+                    width: isCompact ? 0 : 170,
                   }}
-                  initial={{ opacity: 1, width: 160 }}
+                  initial={{ opacity: 1, width: 170 }}
                   transition={{ duration: 0.45, ease: [0.4, 0, 0.2, 1] }}
                 >
-                  Jawanexis
-                </motion.span>
+                  <Image
+                    src="jawanexis_logo-removebg-preview.png"
+                    alt="Jawanexis"
+                    width={552}
+                    height={552}
+                    className="object-contain h-20 w-30 md:h-24 md:w-40"
+                  />
+                </motion.div>
               </motion.div>
             </Link>
           </motion.div>
@@ -145,18 +153,29 @@ const Navbar = () => {
             }`}
             transition={mergeTransition}
           >
-            {menuItems.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`text-[#FFFFFF] hover:text-[#B3B3B3] transition-colors duration-300 relative group font-medium ${
-                  isCompact ? 'text-sm whitespace-nowrap' : 'text-sm'
-                }`}
-              >
-                {item.name}
-                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-white transition-all duration-300 group-hover:w-full"></span>
-              </Link>
-            ))}
+            {menuItems.map((item) => {
+              const isActive = pathname === item.href || pathname.startsWith(item.href + '/');
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={`text-[#FFFFFF] hover:text-[#B3B3B3] transition-colors duration-300 relative group font-medium flex flex-col items-center ${
+                    isCompact ? 'text-sm whitespace-nowrap' : 'text-sm'
+                  }`}
+                >
+                  {item.name}
+                  {isActive && (
+                    <motion.div
+                      className="w-1 h-1 bg-white rounded-full mt-1"
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+                    />
+                  )}
+                  <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-white transition-all duration-300 group-hover:w-full"></span>
+                </Link>
+              );
+            })}
           </motion.div>
 
           <motion.div
@@ -193,16 +212,27 @@ const Navbar = () => {
             className="lg:hidden bg-[#0B0B0B] border-t border-[#222222]"
           >
             <div className="container-custom py-6 space-y-4">
-              {menuItems.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className="block text-white hover:text-[#B3B3B3] transition-colors duration-300 py-2"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              ))}
+              {menuItems.map((item) => {
+                const isActive = pathname === item.href || pathname.startsWith(item.href + '/');
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className="flex items-center text-white hover:text-[#B3B3B3] transition-colors duration-300 py-2"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {item.name}
+                    {isActive && (
+                      <motion.div
+                        className="w-1 h-1 bg-white rounded-full ml-2"
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+                      />
+                    )}
+                  </Link>
+                );
+              })}
               <Link
                 href="/contact"
                 className="block w-full text-center bg-white text-black px-6 py-3 rounded-lg hover:bg-[#E5E5E5] transition-all duration-300 mt-4"

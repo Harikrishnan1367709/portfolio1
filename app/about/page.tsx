@@ -1,10 +1,29 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { Target, Eye, Award, Users as Users2 } from 'lucide-react';
 import CTA from '@/components/CTA';
 
 export default function AboutPage() {
+  const teamMembers = [
+    {
+      name: 'XXXXXXXXXXXX',
+      role: 'Co-Founder & CEO',
+      image: '/team photo.jpeg',
+    },
+    {
+      name: 'XXXXXXXXXXXX',
+      role: 'Head of Design',
+      image: '/team photo.jpeg',
+    },
+    {
+      name: 'XXXXXXXXXXXX',
+      role: 'Head of Engineering',
+      image: '/team photo.jpeg',
+    },
+  ];
+
   const values = [
     {
       icon: Target,
@@ -130,6 +149,61 @@ export default function AboutPage() {
                     {value.description}
                   </p>
                 </motion.div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-24">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-[32px] md:text-[48px] font-bold text-white mb-10"
+            >
+              Our Core Team
+            </motion.h2>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="relative mx-auto mb-10 w-fit overflow-hidden rounded-2xl border border-[#222222]"
+            >
+              <Image
+                src="/team photo.jpeg"
+                alt="Jawanexis core team"
+                width={1500}
+                height={900}
+                className="h-[380px] w-[380px] object-cover md:h-[460px] md:w-[460px]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/45 to-transparent" />
+            </motion.div>
+
+            <div className="mx-auto grid max-w-6xl sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+              {teamMembers.map((member, index) => (
+                <motion.article
+                  key={member.name}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.08 }}
+                  className="w-full overflow-hidden rounded-sm border border-[#2A2A2A] bg-[#06070A] text-center"
+                >
+                  <div className="relative h-[320px] bg-[#D9D9D9]">
+                    <Image
+                      src={member.image}
+                      alt={member.name}
+                      fill
+                      className="object-cover grayscale"
+                    />
+                  </div>
+                  <div className="border-t border-[#1E1E1E] px-4 py-4">
+                    <h3 className="text-white text-[30px] font-semibold leading-tight">{member.name}</h3>
+                    <p className="mt-2 text-[#B8C7E3] text-sm">{member.role}</p>
+                  </div>
+                </motion.article>
               ))}
             </div>
           </div>

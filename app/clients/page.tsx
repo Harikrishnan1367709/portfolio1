@@ -6,18 +6,11 @@ import CTA from '@/components/CTA';
 
 export default function ClientsPage() {
   const clients = [
-    'TechStart Inc',
-    'Innovation Labs',
-    'Digital Ventures',
-    'Global Finance Corp',
-    'MedTech Solutions',
-    'RetailHub Inc',
-    'DataVision Analytics',
-    'LogiTech Corp',
-    'QuickEats',
-    'Smart Agro',
-    'AutoConnect',
-    'BlockChain Solutions',
+    'Revamppayment gateway integration (trust)',
+    'ALPHASPECTS-CRM',
+    'NEOTOUCH',
+    'JAWA EDTECH -lms',
+    'queue LESS-website',
   ];
 
   return (

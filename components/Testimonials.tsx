@@ -7,24 +7,24 @@ import { ChevronLeft, ChevronRight, Star, Quote } from 'lucide-react';
 const Testimonials = () => {
   const testimonials = [
     {
-      quote: 'Revamp completely redefined our brand visuals. The colorful leaf logo and creative approach really captured our identity. Working with their team was smooth and professional.',
-      name: 'Revamp',
+      quote: 'Revamppayment gateway integration (trust) helped strengthen our payment experience and improve user confidence across key transaction journeys.',
+      name: 'Revamppayment gateway integration (trust)',
       position: 'Client',
-      company: 'Revamp',
+      company: 'Revamppayment gateway integration (trust)',
       rating: 5,
     },
     {
-      quote: 'Alphaspects\' geometric logo and modern design language elevated our digital presence. The team was responsive and delivered a high-quality product on time.',
-      name: 'Alphaspects',
+      quote: 'ALPHASPECTS-CRM gave our team a more organized customer workflow, and the delivery quality was strong from planning to handoff.',
+      name: 'ALPHASPECTS-CRM',
       position: 'Client',
-      company: 'Alphaspects',
+      company: 'ALPHASPECTS-CRM',
       rating: 5,
     },
     {
-      quote: 'Neotouch\'s web platform was built seamlessly. The combination of their technical expertise and design sense gave us a product our users love.',
-      name: 'Neotouch',
+      quote: 'NEOTOUCH delivered a clean and reliable implementation, and the final product experience was smooth for both internal teams and end users.',
+      name: 'NEOTOUCH',
       position: 'Client',
-      company: 'Neotouch',
+      company: 'NEOTOUCH',
       rating: 5,
     },
   ];

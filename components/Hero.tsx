@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 
 const Hero = () => {
   const highlightWords = ['Innovative', 'Seamless', 'Engaging', 'Powerful', 'Memorable'];
-  const pastelColors = ['#A5B4FC', '#6EE7B7', '#F9A8D4', '#ea5a5a', '#93C5FD'];
+  const pastelColors = ['#A5B4FC', '#6EE7B7', '#F9A8D4', '#6300f7', '#93fdc8'];
   const [activeWordIndex, setActiveWordIndex] = useState(0);
 
   useEffect(() => {
@@ -122,17 +122,20 @@ const Hero = () => {
             variants={itemVariants}
             className="w-full text-center text-[40px] md:text-[64px] lg:text-[72px] font-bold leading-[1.1] text-white"
           >
-            Crafting digital experiences that are{' '}
-            <motion.span
-              key={highlightWords[activeWordIndex]}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, ease: 'circInOut' }}
-              className="inline-block"
-              style={{ color: pastelColors[activeWordIndex] }}
-            >
-              {highlightWords[activeWordIndex]}
-            </motion.span>
+            <span className="block">Crafting digital experiences</span>
+            <span className="block text-left">
+              that are{' '}
+              <motion.span
+                key={highlightWords[activeWordIndex]}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.35, ease: 'circInOut' }}
+                className="inline-block"
+                style={{ color: pastelColors[activeWordIndex] }}
+              >
+                {highlightWords[activeWordIndex]}
+              </motion.span>
+            </span>
           </motion.h1>
         </motion.div>
 
