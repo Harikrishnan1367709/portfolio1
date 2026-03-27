@@ -13,6 +13,9 @@ export const metadata: Metadata = {
   title: 'Jawanexis Technologies | Software Development Company in Coimbatore',
   description: 'Leading software development company delivering scalable digital solutions for startups, enterprises, and global businesses. Full Stack Development, Mobile Apps, Web Applications, and MuleSoft Integration.',
   keywords: 'software development, web development, mobile apps, full stack development, coimbatore, jawanexis',
+  icons: {
+    icon: '/favicon.ico',
+  },
   openGraph: {
     title: 'Jawanexis Technologies | Software Development Company',
     description: 'Leading software development company delivering scalable digital solutions',
