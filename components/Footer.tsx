@@ -34,7 +34,7 @@ const Footer = () => {
           <div>
             <h3 className="text-white font-bold text-lg mb-4">Jawanexis Technologies</h3>
             <p className="text-[#B3B3B3] text-sm mb-6 leading-relaxed">
-              Leading software development company delivering scalable digital solutions for startups, enterprises, and global businesses.
+              Leading software development company in Coimbatore delivering scalable digital solutions for startups, enterprises, and global businesses.
             </p>
             <div className="flex space-x-4">
               {socialLinks.map((social) => (
@@ -85,21 +85,26 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="text-white font-semibold text-base mb-4">Contact Info</h4>
+            <h4 className="text-white font-semibold text-base mb-4">Contact Info (NAP)</h4>
             <ul className="space-y-4">
+              <li className="flex items-start space-x-3">
+                <span className="text-[#B3B3B3] text-sm">
+                  <strong className="text-white">Name:</strong> Jawanexis Technologies
+                </span>
+              </li>
               <li className="flex items-start space-x-3">
                 <MapPin size={18} className="text-[#B3B3B3] mt-1 flex-shrink-0" />
                 <span className="text-[#B3B3B3] text-sm">
-                  No: 54 Bharathi park 7th Cross, Near ICICI Bank, Saibaba Colony, Coimbatore 641043
+                  <strong className="text-white">Address:</strong> No: 54 Bharathi Park 7th Cross, Near ICICI Bank, Saibaba Colony, Coimbatore, Tamil Nadu 641043, India
                 </span>
               </li>
               <li className="flex items-center space-x-3">
                 <Mail size={18} className="text-[#B3B3B3] flex-shrink-0" />
                 <a
-                  href="mailto:sales@jawanexis.com"
+                  href="mailto:23z132@psgietch.ac.in"
                   className="text-[#B3B3B3] hover:text-white transition-colors duration-300 text-sm"
                 >
-                  sales@jawanexis.com
+                  <strong className="text-white">Email:</strong> 23z132@psgietch.ac.in
                 </a>
               </li>
               <li className="flex items-center space-x-3">
@@ -108,7 +113,7 @@ const Footer = () => {
                   href="tel:+919790631286"
                   className="text-[#B3B3B3] hover:text-white transition-colors duration-300 text-sm"
                 >
-                  +91 9790631286
+                  <strong className="text-white">Phone:</strong> +91 9790631286
                 </a>
               </li>
             </ul>

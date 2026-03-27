@@ -5,12 +5,22 @@ import Testimonials from '@/components/Testimonials';
 import CTA from '@/components/CTA';
 
 export default function ClientsPage() {
-  const clients = [
-    'Revamppayment gateway integration (trust)',
-    'ALPHASPECTS-CRM',
-    'NEOTOUCH',
-    'JAWA EDTECH -lms',
-    'queue LESS-website',
+  const clientSectors = [
+    {
+      sector: 'Enterprise & IT Services',
+      description: 'Technology and software partners delivering business-critical systems.',
+      clients: ['Aes Technologies Private limited', 'Alphaspects', 'axolent'],
+    },
+    {
+      sector: 'Fintech & Digital Platforms',
+      description: 'Secure and scalable digital products for finance and modern operations.',
+      clients: ['Revamp', 'Queless'],
+    },
+    {
+      sector: 'Consumer & EdTech',
+      description: 'User-first applications focused on engagement, learning, and growth.',
+      clients: ['Neotouch', 'Jawa edtech'],
+    },
   ];
 
   return (
@@ -35,19 +45,37 @@ export default function ClientsPage() {
 
       <section className="section-padding">
         <div className="container-custom">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {clients.map((client, index) => (
-              <motion.div
-                key={client}
+          <div className="space-y-12">
+            {clientSectors.map((group, groupIndex) => (
+              <motion.section
+                key={group.sector}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.05 }}
-                whileHover={{ scale: 1.05 }}
-                className="bg-[#161616] border border-[#222222] rounded-2xl p-8 flex items-center justify-center text-center hover:border-white transition-all duration-300 cursor-pointer min-h-[120px]"
+                transition={{ duration: 0.5, delay: groupIndex * 0.08 }}
+                className="rounded-2xl border border-[#1E1E1E] bg-[#0B0B0B] p-6 md:p-8"
               >
-                <span className="text-white font-semibold">{client}</span>
-              </motion.div>
+                <div className="mb-6">
+                  <h2 className="text-2xl md:text-3xl font-semibold text-white">{group.sector}</h2>
+                  <p className="mt-2 text-[#B3B3B3] text-base leading-relaxed">{group.description}</p>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                  {group.clients.map((client, clientIndex) => (
+                    <motion.div
+                      key={`${group.sector}-${client}`}
+                      initial={{ opacity: 0, y: 16 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: clientIndex * 0.04 }}
+                      whileHover={{ scale: 1.03 }}
+                      className="bg-[#161616] border border-[#222222] rounded-xl px-6 py-6 flex items-center justify-center text-center hover:border-white transition-all duration-300 cursor-pointer min-h-[100px]"
+                    >
+                      <span className="text-white font-semibold">{client}</span>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.section>
             ))}
           </div>
         </div>

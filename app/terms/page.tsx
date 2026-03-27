@@ -56,7 +56,7 @@ export default function TermsPage() {
               <section>
                 <h2 className="text-white text-2xl font-semibold mb-4">6. Contact Information</h2>
                 <p className="leading-relaxed">
-                  For any questions regarding these Terms of Service, please contact us at sales@jawanexis.com
+                  For any questions regarding these Terms of Service, please contact us at 23z132@psgietch.ac.in
                 </p>
               </section>
             </div>
