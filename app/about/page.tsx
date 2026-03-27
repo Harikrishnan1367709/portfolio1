@@ -58,7 +58,7 @@ export default function AboutPage() {
             className="text-center max-w-4xl mx-auto"
           >
             <h1 className="text-[40px] md:text-[64px] font-bold text-white mb-6">
-              About Jawanexis Technologies
+              About Jawanexis Technologies in Coimbatore
             </h1>
             <p className="text-[#B3B3B3] text-xl leading-relaxed">
               A forward-thinking technology company focused on delivering innovative digital solutions that help businesses grow, transform, and scale in the modern digital economy
@@ -77,7 +77,7 @@ export default function AboutPage() {
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-[32px] md:text-[48px] font-bold text-white mb-6">
-                Who We Are
+                  Who We Are: Trusted Technology Partner in Coimbatore
               </h2>
               <p className="text-[#B3B3B3] text-lg leading-relaxed mb-6">
                 Jawanexis Technologies is a modern software development and technology solutions company based in Coimbatore, India, delivering scalable digital solutions for startups, enterprises, and global businesses.
@@ -85,6 +85,9 @@ export default function AboutPage() {
               <p className="text-[#B3B3B3] text-lg leading-relaxed">
                 We specialize in Full Stack Development, Mobile App Development, Web Applications, MuleSoft API Integrations, Quality Engineering, and IT Resource Staffing. Our technology-driven approach helps businesses transform ideas into high-performance digital products.
               </p>
+                <p className="text-[#B3B3B3] text-lg leading-relaxed mt-6">
+                  Based in Coimbatore, India, we are serving startups and enterprises in Coimbatore and globally with product engineering, modernization, and long-term technology support. Organizations choose us as a trusted software development partner in Coimbatore for dependable execution, transparent collaboration, and measurable business outcomes.
+                </p>
             </motion.div>
 
             <motion.div
@@ -98,7 +101,7 @@ export default function AboutPage() {
                 <div>
                   <div className="flex items-center space-x-3 mb-4">
                     <Eye className="text-white" size={32} />
-                    <h3 className="text-white font-bold text-2xl">Our Vision</h3>
+                    <h3 className="text-white font-bold text-2xl">Our Vision in Coimbatore and Beyond</h3>
                   </div>
                   <p className="text-[#B3B3B3] leading-relaxed">
                     To become a globally recognized technology partner that empowers businesses through innovative software solutions, digital transformation, and cutting-edge technologies.
@@ -108,7 +111,7 @@ export default function AboutPage() {
                 <div>
                   <div className="flex items-center space-x-3 mb-4">
                     <Target className="text-white" size={32} />
-                    <h3 className="text-white font-bold text-2xl">Our Mission</h3>
+                    <h3 className="text-white font-bold text-2xl">Our Mission for Scalable Software in Coimbatore</h3>
                   </div>
                   <p className="text-[#B3B3B3] leading-relaxed">
                     To deliver high-quality technology solutions that help businesses accelerate growth, improve operational efficiency, and create exceptional digital experiences for their customers.

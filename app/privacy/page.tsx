@@ -49,7 +49,7 @@ export default function PrivacyPage() {
               <section>
                 <h2 className="text-white text-2xl font-semibold mb-4">5. Contact Us</h2>
                 <p className="leading-relaxed">
-                  If you have any questions about this Privacy Policy, please contact us at sales@jawanexis.com
+                  If you have any questions about this Privacy Policy, please contact us at 23z132@psgietch.ac.in
                 </p>
               </section>
             </div>

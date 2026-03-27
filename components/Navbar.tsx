@@ -104,11 +104,7 @@ const Navbar = () => {
             transition={mergeTransition}
           >
             <Link href="/" className="flex items-center">
-              <motion.div
-                className="flex items-center overflow-hidden"
-                animate={{ columnGap: isCompact ? 0 : 12 }}
-                transition={{ duration: 0.45, ease: [0.4, 0, 0.2, 1] }}
-              >
+              <div className="flex items-center overflow-hidden">
                 <Image
                   src="/Logo_Design_for_Jawanexis.png"
                   alt="Jawanexis Technologies"
@@ -125,19 +121,20 @@ const Navbar = () => {
                   animate={{
                     opacity: isTextHidden ? 0 : 1,
                     width: isCompact ? 0 : 170,
+                    marginLeft: isCompact ? 0 : 12,
                   }}
-                  initial={{ opacity: 1, width: 170 }}
+                  initial={{ opacity: 1, width: 170, marginLeft: 12 }}
                   transition={{ duration: 0.45, ease: [0.4, 0, 0.2, 1] }}
                 >
                   <Image
-                    src="jawanexis_logo-removebg-preview.png"
+                    src="/jawanexis_logo-removebg-preview.png"
                     alt="Jawanexis"
                     width={552}
                     height={552}
                     className="object-contain h-20 w-30 md:h-24 md:w-40"
                   />
                 </motion.div>
-              </motion.div>
+              </div>
             </Link>
           </motion.div>
 

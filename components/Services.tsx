@@ -82,10 +82,10 @@ const Services = () => {
           className="text-center mb-16"
         >
           <h2 className="text-[32px] md:text-[48px] font-bold text-white mb-4">
-            Our Expertise
+            Software Development Services in Coimbatore
           </h2>
           <p className="text-[#B3B3B3] text-lg max-w-2xl mx-auto">
-            We deliver comprehensive digital solutions across the entire technology stack
+            We deliver comprehensive full stack, web, and mobile app development solutions for startups and enterprises.
           </p>
         </motion.div>
 

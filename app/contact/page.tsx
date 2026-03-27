@@ -1,8 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
+
+const MAX_RESUME_SIZE_BYTES = 5 * 1024 * 1024;
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -14,27 +16,49 @@ export default function ContactPage() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitMessage, setSubmitMessage] = useState('');
+  const [resumeFile, setResumeFile] = useState<File | null>(null);
+  const resumeInputRef = useRef<HTMLInputElement | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus('idle');
+    setSubmitMessage('');
 
     try {
+      const payload = new FormData();
+      payload.append('name', formData.name);
+      payload.append('email', formData.email);
+      payload.append('phone', formData.phone);
+      payload.append('company', formData.company);
+      payload.append('message', formData.message);
+      if (resumeFile) {
+        payload.append('resume', resumeFile);
+      }
+
       const response = await fetch('/api/contact', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: payload,
       });
+
+      const result = await response.json();
 
       if (response.ok) {
         setSubmitStatus('success');
+        setSubmitMessage(result?.message || 'Thank you! Your message has been sent successfully.');
         setFormData({ name: '', email: '', phone: '', company: '', message: '' });
+        setResumeFile(null);
+        if (resumeInputRef.current) {
+          resumeInputRef.current.value = '';
+        }
       } else {
         setSubmitStatus('error');
+        setSubmitMessage(result?.error || 'Sorry, there was an error sending your message. Please try again.');
       }
     } catch (error) {
       setSubmitStatus('error');
+      setSubmitMessage('Unable to connect to the server. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -42,6 +66,27 @@ export default function ContactPage() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleResumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] || null;
+
+    if (!file) {
+      setResumeFile(null);
+      return;
+    }
+
+    if (file.size > MAX_RESUME_SIZE_BYTES) {
+      setSubmitStatus('error');
+      setSubmitMessage('Resume/CV file size must be 5MB or less.');
+      setResumeFile(null);
+      if (resumeInputRef.current) {
+        resumeInputRef.current.value = '';
+      }
+      return;
+    }
+
+    setResumeFile(file);
   };
 
   return (
@@ -77,8 +122,8 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="text-white font-semibold mb-1">Email</h3>
-                    <a href="mailto:sales@jawanexis.com" className="text-[#B3B3B3] hover:text-white transition-colors">
-                      sales@jawanexis.com
+                    <a href="mailto:23z132@psgietch.ac.in" className="text-[#B3B3B3] hover:text-white transition-colors">
+                      23z132@psgietch.ac.in
                     </a>
                   </div>
                 </div>
@@ -130,13 +175,13 @@ export default function ContactPage() {
 
                 {submitStatus === 'success' && (
                   <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4 mb-6">
-                    <p className="text-green-500 text-sm">Thank you! Your message has been sent successfully.</p>
+                    <p className="text-green-500 text-sm">{submitMessage}</p>
                   </div>
                 )}
 
                 {submitStatus === 'error' && (
                   <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4 mb-6">
-                    <p className="text-red-500 text-sm">Sorry, there was an error sending your message. Please try again.</p>
+                    <p className="text-red-500 text-sm">{submitMessage}</p>
                   </div>
                 )}
 
@@ -217,6 +262,24 @@ export default function ContactPage() {
                       className="w-full px-4 py-3 bg-[#0B0B0B] border border-[#222222] rounded-lg text-white focus:outline-none focus:border-white transition-colors resize-none"
                       placeholder="Tell us about your project..."
                     />
+                  </div>
+
+                  <div>
+                    <label htmlFor="resume" className="block text-white font-medium mb-2">
+                      Resume / CV
+                    </label>
+                    <input
+                      ref={resumeInputRef}
+                      type="file"
+                      id="resume"
+                      name="resume"
+                      accept=".pdf,.doc,.docx"
+                      onChange={handleResumeChange}
+                      className="w-full px-4 py-3 bg-[#0B0B0B] border border-[#222222] rounded-lg text-white focus:outline-none focus:border-white transition-colors file:mr-4 file:rounded-md file:border-0 file:bg-white file:px-3 file:py-2 file:text-sm file:font-medium file:text-black hover:file:bg-[#E5E5E5]"
+                    />
+                    <p className="mt-2 text-xs text-[#8C8C8C]">
+                      Optional. Upload PDF, DOC, or DOCX up to 5MB.
+                    </p>
                   </div>
 
                   <button

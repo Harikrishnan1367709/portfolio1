@@ -5,6 +5,63 @@ import { notFound } from 'next/navigation';
 import { ArrowLeft } from 'lucide-react';
 import { getProjectBySlug, PROJECT_CASE_STUDIES } from '@/lib/projects-data';
 
+const renderInlineStrong = (text: string) => {
+  const chunks = text.split(/(\*\*[^*]+\*\*)/g).filter(Boolean);
+
+  return chunks.map((chunk, index) => {
+    if (chunk.startsWith('**') && chunk.endsWith('**')) {
+      return (
+        <strong key={`${chunk}-${index}`} className="font-semibold text-white">
+          {chunk.slice(2, -2)}
+        </strong>
+      );
+    }
+
+    return <span key={`${chunk}-${index}`}>{chunk}</span>;
+  });
+};
+
+const renderSectionContent = (lines: string[]) => {
+  const blocks: JSX.Element[] = [];
+  let listItems: string[] = [];
+
+  const flushList = () => {
+    if (!listItems.length) {
+      return;
+    }
+
+    blocks.push(
+      <ul key={`list-${blocks.length}`} className="list-disc space-y-2 pl-6 text-[19px] leading-relaxed text-[#E5E5E5] marker:text-[#E5E5E5]">
+        {listItems.map((item, index) => (
+          <li key={`${item}-${index}`}>{renderInlineStrong(item)}</li>
+        ))}
+      </ul>
+    );
+
+    listItems = [];
+  };
+
+  lines.forEach((line, index) => {
+    const trimmed = line.trim();
+
+    if (trimmed.startsWith('- ')) {
+      listItems.push(trimmed.slice(2));
+      return;
+    }
+
+    flushList();
+    blocks.push(
+      <p key={`paragraph-${index}`} className="text-[19px] leading-relaxed text-[#B3B3B3]">
+        {renderInlineStrong(trimmed)}
+      </p>
+    );
+  });
+
+  flushList();
+
+  return <div className="space-y-5">{blocks}</div>;
+};
+
 export function generateStaticParams() {
   return PROJECT_CASE_STUDIES.map((project) => ({ slug: project.slug }));
 }
@@ -30,8 +87,6 @@ export default function ProjectViewPage({ params }: { params: { slug: string } }
   if (!project) {
     notFound();
   }
-
-  const toNarrative = (lines: string[]) => lines.join(' ');
 
   return (
     <div className="min-h-screen bg-[#000000]">
@@ -73,7 +128,7 @@ export default function ProjectViewPage({ params }: { params: { slug: string } }
               <div key={section.title} className="space-y-8 md:space-y-10">
                 <article className="grid gap-8 border-b border-[#1A1A1A] pb-8 md:grid-cols-[280px_1fr] md:gap-12 md:pb-10">
                   <h2 className="text-[30px] font-semibold leading-tight text-white md:text-[40px]">{section.title}</h2>
-                  <p className="text-[19px] leading-relaxed text-[#B3B3B3]">{toNarrative(section.points)}</p>
+                  {renderSectionContent(section.points)}
                 </article>
 
                 {section.imageAfter && (
@@ -86,7 +141,7 @@ export default function ProjectViewPage({ params }: { params: { slug: string } }
 
             <article className="grid gap-8 border-t border-[#1A1A1A] pt-8 md:grid-cols-[280px_1fr] md:gap-12 md:pt-10">
               <h2 className="text-[30px] font-semibold leading-tight text-white md:text-[40px]">Business Impact</h2>
-              <p className="text-[19px] leading-relaxed text-[#B3B3B3]">{toNarrative(project.impact)}</p>
+              {renderSectionContent(project.impact)}
             </article>
           </div>
         </div>

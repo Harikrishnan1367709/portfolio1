@@ -145,7 +145,7 @@ const Hero = () => {
               variants={itemVariants}
               className="text-[#B3B3B3] text-lg md:text-xl leading-relaxed mb-8 max-w-2xl"
             >
-              At Jawanexis, we design and develop scalable web apps, mobile apps, and modern digital solutions.
+              As a leading software development company in Coimbatore, Jawanexis is a trusted technology partner in Coimbatore delivering enterprise-grade software solutions, full stack development, and mobile app development.
             </motion.p>
 
             <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4">
