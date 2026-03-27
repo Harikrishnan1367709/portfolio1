@@ -19,13 +19,15 @@ type ServiceDetail = {
   applications?: Benefit[];
   benefitsTitle?: string;
   benefitsSubtitle?: string;
+  applicationsTitle?: string;
+  applicationsSubtitle?: string;
 };
 
 const BenefitCard = ({ title, description }: { title: string; description: string }) => (
   <div className="bg-[#111] border border-zinc-800 rounded-2xl p-8 transition-all hover:scale-[1.02] flex flex-col justify-between h-full">
     <div className="h-8 w-8 rounded-full bg-zinc-800 mb-3 flex items-center justify-center text-cyan-400">✓</div>
     <h4 className="text-white font-semibold mb-2">{title}</h4>
-    <p className="text-gray-400 leading-relaxed">{description}</p>
+    <p className="text-gray-400 leading-relaxed whitespace-pre-line">{description}</p>
   </div>
 );
 
@@ -254,15 +256,17 @@ const serviceDetails: ServiceDetail[] = [
       'Modern UI/UX implementation',
     ],
     technologies: ['Next.js', 'React.js', 'WordPress', 'Headless CMS', 'Shopify', 'Webflow'],
+    benefitsTitle: 'Benefits of Website Development',
+    benefitsSubtitle: 'High-performance, scalable, and user-focused websites designed for modern digital experiences',
     benefits: [
-      { title: 'Strong Digital Presence', description: 'Enhances brand visibility and credibility online. Helps businesses reach a wider audience effectively.' },
-      { title: 'Responsive Design', description: 'Ensures seamless performance across mobile, tablet, and desktop devices. Provides a consistent user experience.' },
-      { title: 'SEO Optimization', description: 'Improves search engine rankings and discoverability. Drives organic traffic and engagement.' },
-      { title: 'User Engagement', description: 'Delivers intuitive and interactive experiences. Encourages higher retention and conversions.' },
-      { title: 'Fast & Optimized Performance', description: 'Ensures quick loading and smooth navigation. Improves user satisfaction and retention.' },
-      { title: 'Scalable Architecture', description: 'Supports business growth and increasing user demand. Maintains performance under load.' },
-      { title: 'Secure Systems', description: 'Protects user data and application integrity. Ensures safe and reliable operations.' },
-      { title: 'Easy Maintenance', description: 'Simplifies updates, upgrades, and future enhancements. Reduces long-term development effort.' },
+      { title: 'Strong Digital Presence', description: 'A well-designed website enhances brand credibility and online visibility. Helps businesses reach a wider audience and create a lasting impression.' },
+      { title: 'Responsive & Adaptive Design', description: 'Optimized for mobile, tablet, and desktop devices. Ensures consistent and seamless user experience across platforms.' },
+      { title: 'High Performance & Speed', description: 'Fast loading times and smooth navigation improve usability. Enhances engagement and reduces bounce rates.' },
+      { title: 'SEO Optimization', description: 'Built with search engine best practices for better visibility. Drives organic traffic and improves ranking.' },
+      { title: 'Secure & Reliable Systems', description: 'Implements strong security measures to protect data. Ensures stable and reliable performance.' },
+      { title: 'Scalable & Future-Ready', description: 'Designed to support growth and future enhancements. Adapts easily to changing business needs.' },
+      { title: 'Easy Maintenance & Updates', description: 'Simplifies updates and feature additions. Reduces long-term maintenance effort.' },
+      { title: 'Enhanced User Engagement', description: 'Improves interaction with intuitive design and navigation. Boosts user retention and conversions.' },
     ],
   },
   {
@@ -284,24 +288,26 @@ const serviceDetails: ServiceDetail[] = [
     benefitsTitle: 'Benefits of MuleSoft Integration',
     benefitsSubtitle: 'Scalable, resilient, and enterprise-ready integration solutions designed for real-world complexity',
     benefits: [
-      { title: 'Scalable API-Led Architecture', description: 'A structured API-led approach using System, Process, and Experience layers enables reusable and governed integrations. It simplifies complex system interactions and supports long-term scalability and maintainability.' },
-      { title: 'Real-Time & Event-Driven Systems', description: 'Enables asynchronous processing and event-based communication for instant data flow. Improves responsiveness, reduces latency, and enhances system performance.' },
-      { title: 'Seamless Enterprise Integration', description: 'Connects CRM, ERP, databases, and third-party platforms into a unified ecosystem. Ensures smooth communication and eliminates data silos.' },
-      { title: 'Advanced Data Engineering', description: 'Supports large-scale data transformation and pipelines using optimized processing. Ensures accurate and efficient data movement across systems.' },
-      { title: 'Cloud-Native Scalability', description: 'Leverages modern cloud platforms like CloudHub 2.0 for scalable deployments. Ensures high availability and optimized resource usage.' },
-      { title: 'Modernization & Future Readiness', description: 'Transforms legacy systems into API-led architectures. Improves governance, maintainability, and adaptability.' },
-      { title: 'Reliability & Fault Tolerance', description: 'Implements retry strategies, error handling, and fault-tolerant flows. Ensures stable and resilient integrations.' },
-      { title: 'Monitoring & Observability', description: 'Provides real-time logging, alerts, and performance tracking. Enables faster issue detection and resolution.' },
+      { title: 'Scalable API-Led Architecture', description: 'A structured API-led approach using System, Process, and Experience layers enables clean, reusable, and governed integrations.\n\nThis architecture simplifies complex system interactions while ensuring long-term scalability and maintainability.\n\nIt allows organizations to adapt quickly to evolving business requirements without rebuilding core integrations.' },
+      { title: 'Real-Time & Event-Driven Systems', description: 'Modern integration demands real-time responsiveness, and MuleSoft enables this through event-driven architecture and asynchronous processing.\n\nSystems communicate instantly using queues and messaging, reducing latency and improving performance.\n\nThis ensures faster decision-making and seamless user experiences across connected platforms.' },
+      { title: 'Seamless Enterprise Integration', description: 'MuleSoft connects critical enterprise systems such as CRM, ERP, databases, and third-party platforms into a unified ecosystem.\n\nIt eliminates data silos and ensures smooth communication between applications.\n\nBoth real-time and batch integrations are optimized for performance and reliability.' },
+      { title: 'Advanced Data Engineering', description: 'Beyond integration, MuleSoft enables large-scale data movement and transformation using powerful tools like DataWeave.\n\nIt supports batch processing, analytics pipelines, and real-time synchronization.\n\nThis ensures accurate, efficient, and high-performance data handling across systems.' },
+      { title: 'Cloud-Native Scalability', description: 'With platforms like CloudHub 2.0, MuleSoft enables scalable, containerized deployments in modern cloud environments.\n\nApplications can dynamically scale based on demand while maintaining high availability.\n\nThis ensures optimized resource utilization and consistent performance.' },
+      { title: 'Modernization & Future Readiness', description: 'Legacy systems are transformed into modern, API-driven architectures that are easier to manage and extend.\n\nThis modernization improves system governance, reusability, and long-term maintainability.\n\nOrganizations become more agile and better prepared for future technological changes.' },
+      { title: 'Reliability & Fault Tolerance', description: 'Robust error handling frameworks, retry mechanisms, and dead-letter queue (DLQ) strategies ensure system stability.\n\nFailures are handled gracefully without disrupting business operations.\n\nThis results in resilient integrations that perform reliably under real-world conditions.' },
+      { title: 'Monitoring & Observability', description: 'Real-time logging, monitoring, and alerting provide complete visibility into integration performance.\n\nTeams can quickly detect, diagnose, and resolve issues before they impact users.\n\nThis improves system reliability and reduces downtime.' },
     ],
+    applicationsTitle: 'Applications of MuleSoft',
+    applicationsSubtitle: 'Real-world integration use cases powering enterprise ecosystems',
     applications: [
-      { title: 'Salesforce & CRM Integrations', description: 'Enables seamless data synchronization between Salesforce and enterprise systems. Improves automation and customer insights.' },
-      { title: 'ERP & Enterprise Systems Integration', description: 'Connects ERP systems with financial and operational platforms. Ensures consistent workflows and data accuracy.' },
-      { title: 'Data Warehousing & Analytics', description: 'Integrates platforms like Snowflake and SQL systems for analytics pipelines. Supports real-time insights and business intelligence.' },
-      { title: 'API & Third-Party Integrations', description: 'Connects external APIs with internal systems securely. Improves interoperability and flexibility.' },
-      { title: 'File & SFTP Integrations', description: 'Automates file transfers and batch processing across systems. Ensures reliable data exchange workflows.' },
-      { title: 'Event-Driven Applications', description: 'Builds real-time systems using messaging and event-based architecture. Improves responsiveness and scalability.' },
-      { title: 'Legacy System Modernization', description: 'Transforms outdated systems into modern API-led architectures. Improves performance and maintainability.' },
-      { title: 'Cloud Migration & Integration', description: 'Supports migration to CloudHub 2.0 and cloud-native environments. Ensures minimal downtime and optimized performance.' },
+      { title: 'Salesforce & CRM Integrations', description: 'MuleSoft enables seamless integration between Salesforce and enterprise systems, ensuring real-time data synchronization.\n\nIt automates workflows, reduces manual effort, and improves operational efficiency.\n\nThis results in better customer insights and faster decision-making.' },
+      { title: 'ERP & Enterprise Systems Integration', description: 'Connects ERP systems with operational, financial, and business platforms for unified workflows.\n\nEnsures consistent data across departments and eliminates process inefficiencies.\n\nSupports both real-time and batch processing for enterprise-scale operations.' },
+      { title: 'Data Warehousing & Analytics', description: 'Integrates data sources with platforms like Snowflake and SQL-based systems for advanced analytics.\n\nEnables creation of scalable data pipelines and business intelligence dashboards.\n\nSupports real-time insights and data-driven decision-making.' },
+      { title: 'API & Third-Party Integrations', description: 'Connects external APIs with internal systems in a secure and scalable way.\n\nEnables businesses to extend functionality and integrate with partners, vendors, and services.\n\nImproves system flexibility and interoperability.' },
+      { title: 'File & SFTP Integrations', description: 'Automates file-based data exchange across enterprise systems and platforms.\n\nSupports large-scale batch processing and secure file transfers.\n\nEnsures reliable and efficient handling of enterprise workflows.' },
+      { title: 'Event-Driven Applications', description: 'Builds responsive systems using event-based communication and messaging patterns.\n\nEnables real-time updates and decoupled system interactions.\n\nImproves scalability and system performance.' },
+      { title: 'Legacy System Modernization', description: 'Transforms outdated ESB-based systems into modern API-led architectures.\n\nImproves maintainability, scalability, and overall system efficiency.\n\nEnsures long-term sustainability and reduced technical debt.' },
+      { title: 'Cloud Migration & Integration', description: 'Supports migration to modern cloud platforms like CloudHub 2.0 with minimal downtime.\n\nOptimizes performance and resource utilization in cloud environments.\n\nEnsures smooth transition from legacy infrastructure to scalable cloud systems.' },
     ],
   },
   {
@@ -320,15 +326,17 @@ const serviceDetails: ServiceDetail[] = [
       'Continuous quality validation in agile release cycles',
     ],
     technologies: ['Selenium', 'Cypress', 'Playwright', 'JUnit', 'TestNG', 'Postman'],
+    benefitsTitle: 'Benefits of Quality Engineering & Testing',
+    benefitsSubtitle: 'Delivering reliable, secure, and high-performing applications through advanced testing strategies',
     benefits: [
-      { title: 'Improved Software Quality', description: 'Ensures applications are stable, reliable, and error-free. Enhances overall user experience.' },
-      { title: 'Risk Reduction', description: 'Identifies and resolves issues early in development. Prevents costly failures post-deployment.' },
-      { title: 'Performance Optimization', description: 'Validates system behavior under different conditions. Ensures consistent performance.' },
-      { title: 'Faster Release Cycles', description: 'Streamlined testing processes accelerate delivery. Maintains quality while reducing time-to-market.' },
-      { title: 'Automation Efficiency', description: 'Reduces manual effort through automated testing processes. Improves speed and consistency.' },
-      { title: 'Higher Accuracy', description: 'Minimizes human errors in testing workflows. Ensures reliable and repeatable results.' },
-      { title: 'Scalable Testing', description: 'Supports testing across multiple environments and scenarios. Handles complex systems effectively.' },
-      { title: 'Continuous Integration Support', description: 'Integrates with CI/CD pipelines for faster feedback. Enables continuous quality improvement.' },
+      { title: 'Improved Software Quality', description: 'Comprehensive testing ensures applications are stable, reliable, and free from critical defects. Enhances overall user experience by delivering consistent and high-quality performance.' },
+      { title: 'Faster Release Cycles', description: 'Automation and optimized testing processes accelerate development timelines. Enables quicker deployments without compromising on quality.' },
+      { title: 'Early Bug Detection', description: 'Identifies issues at early stages of development, reducing costly fixes later. Improves development efficiency and minimizes production risks.' },
+      { title: 'Performance Optimization', description: 'Validates application behavior under different loads and conditions. Ensures systems perform efficiently even under high traffic.' },
+      { title: 'Enhanced Security Assurance', description: 'Testing strategies include security validation to protect against vulnerabilities. Ensures safe and secure applications for users and businesses.' },
+      { title: 'Continuous Integration Support', description: 'Integrates seamlessly with CI/CD pipelines for automated testing workflows. Provides faster feedback and continuous quality improvement.' },
+      { title: 'Automation Efficiency', description: 'Reduces manual testing effort through modern automation tools and frameworks. Improves accuracy, repeatability, and testing speed.' },
+      { title: 'Consistent User Experience', description: 'Ensures applications behave consistently across devices, browsers, and environments. Delivers a seamless and predictable user experience.' },
     ],
   },
   {
@@ -347,23 +355,17 @@ const serviceDetails: ServiceDetail[] = [
       'Resource availability across Full Stack, Frontend, Backend, MuleSoft, Mobile, QA, and DevOps',
     ],
     technologies: ['Full Stack', 'Frontend', 'Backend', 'MuleSoft', 'Mobile', 'QA', 'DevOps'],
+    benefitsTitle: 'Benefits of IT Resource Staffing',
+    benefitsSubtitle: 'Flexible, scalable, and expert-driven resource solutions to accelerate your development',
     benefits: [
-      { title: 'Deep Industry Knowledge', description: 'Strong understanding of modern technologies and business workflows. Enables delivery of solutions aligned with real-world requirements.' },
-      { title: 'Tailored Solutions', description: 'Approaches customized to meet specific business challenges and goals. Ensures maximum efficiency and relevance.' },
-      { title: 'Scalable Systems', description: 'Solutions designed to grow with evolving business needs. Supports long-term performance and expansion.' },
-      { title: 'Proven Methodologies', description: 'Use of reliable development practices and industry standards. Ensures consistency, quality, and predictable outcomes.' },
-      { title: 'Flexible Collaboration', description: 'Adapts to different project needs and timelines. Ensures smooth and efficient teamwork.' },
-      { title: 'Cost Efficiency', description: 'Optimizes resource usage based on project scope. Reduces unnecessary expenses.' },
-      { title: 'Predictable Delivery', description: 'Structured approaches ensure timely project completion. Improves planning and execution.' },
-      { title: 'Scalable Resources', description: 'Easily adjust team size based on requirements. Supports dynamic business needs.' },
-      { title: 'Process Transparency', description: 'Clear workflows provide visibility across all stages. Improves communication and trust.' },
-      { title: 'Agile Execution', description: 'Supports iterative development and quick adjustments. Enhances flexibility and responsiveness.' },
-      { title: 'Continuous Improvement', description: 'Regular feedback cycles refine processes and outcomes. Drives better results over time.' },
-      { title: 'Efficient Delivery', description: 'Optimized processes reduce delays and inefficiencies. Ensures consistent project progress.' },
-      { title: 'Access to Expertise', description: 'Skilled professionals across multiple domains. Ensures high-quality development and execution.' },
-      { title: 'Faster Project Delivery', description: 'Experienced teams accelerate development timelines. Reduces time-to-market.' },
-      { title: 'Scalable Workforce', description: 'Easily expand or reduce team based on needs. Provides flexibility for different project sizes.' },
-      { title: 'Quality Assurance', description: 'Ensures work meets industry standards and best practices. Maintains consistency and reliability.' },
+      { title: 'Access to Skilled Talent', description: 'Quickly onboard experienced professionals across multiple technologies and domains. Ensures the right expertise is available exactly when your project needs it.' },
+      { title: 'Faster Project Delivery', description: 'Accelerate development timelines with ready-to-deploy skilled resources. Reduces hiring delays and improves overall project speed.' },
+      { title: 'Flexible Engagement Models', description: 'Choose between fixed, time-based, or augmentation models based on your needs. Provides adaptability for changing project requirements.' },
+      { title: 'Cost Optimization', description: 'Eliminates overhead costs associated with full-time hiring and training. Ensures efficient resource utilization and better budget control.' },
+      { title: 'Scalable Workforce', description: 'Easily scale your team up or down depending on project demands. Supports both short-term and long-term project requirements.' },
+      { title: 'Domain Expertise', description: 'Access professionals with deep industry knowledge and technical expertise. Improves solution quality and project outcomes.' },
+      { title: 'Focus on Core Business', description: 'Allows your internal team to focus on strategic goals while experts handle execution. Improves productivity and business efficiency.' },
+      { title: 'Seamless Collaboration', description: 'Integrates smoothly with your existing teams and workflows. Ensures clear communication and efficient delivery.' },
     ],
   },
   {

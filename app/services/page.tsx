@@ -267,7 +267,14 @@ function ServiceSection({ title, description, cards, cols }: ServiceSectionData)
       <p className="text-[#B3B3B3] text-lg max-w-3xl mb-8">{description}</p>
       <div className={gridCols}>
         {cards.map((card) => (
-          <ServiceCard key={card.title} icon={card.icon} title={card.title} description={card.description} tech={card.tech} />
+          <ServiceCard
+            key={card.title}
+            icon={card.icon}
+            title={card.title}
+            description={card.description}
+            tech={card.tech}
+            slug={card.slug}
+          />
         ))}
       </div>
       <div className="mt-10 h-px bg-[#222222]" />
