@@ -1,96 +1,122 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
 import type { ProjectCaseStudy } from '@/lib/projects-data';
 
 type ProjectCaseCardProps = {
   project: ProjectCaseStudy;
-  index?: number;
 };
 
-const CARD_THEMES = [
-  {
-    shell: 'border-[#D7CBE6] bg-[#D5C3E4]',
-    divider: 'border-[#C8B7DA]',
-    logoChip: 'bg-[#6D7DAD]',
-    categoryChip: 'bg-[#CAB7E3] text-[#2E2752]',
-    tag: 'border-[#D8C8E7] bg-[#EBDDFA] text-[#2B3346]',
-    preview: 'border-[#CCC1DD] bg-[#C6BCE0]',
-    cta: 'bg-[#24283A] hover:bg-[#1A1E2E]',
-  },
-  {
-    shell: 'border-[#E9D0CC] bg-[#F1D8D5]',
-    divider: 'border-[#DFBFBA]',
-    logoChip: 'bg-[#7D6B88]',
-    categoryChip: 'bg-[#F0C8C0] text-[#4E2E2A]',
-    tag: 'border-[#E7CBC6] bg-[#F8E4E0] text-[#49373A]',
-    preview: 'border-[#E2C7C2] bg-[#EBC9C5]',
-    cta: 'bg-[#2A2531] hover:bg-[#201C26]',
-  },
-  {
-    shell: 'border-[#D8D8D1] bg-[#E8E7E2]',
-    divider: 'border-[#C9C9C1]',
-    logoChip: 'bg-[#6F7368]',
-    categoryChip: 'bg-[#D9D8C9] text-[#34352E]',
-    tag: 'border-[#D4D5CB] bg-[#EFF0E9] text-[#3A3B35]',
-    preview: 'border-[#D0D0C7] bg-[#DFDFD8]',
-    cta: 'bg-[#2C2D28] hover:bg-[#22231F]',
-  },
-] as const;
+function CaseStudyArrowIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+      <path
+        d="M4.16797 10H15.8346"
+        stroke="white"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M12.5 13.3333L15.8333 10"
+        stroke="white"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M12.5 6.67188L15.8333 10.0052"
+        stroke="white"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
 
-export default function ProjectCaseCard({ project, index = 0 }: ProjectCaseCardProps) {
-  const theme = CARD_THEMES[index % CARD_THEMES.length];
+const bgThemes: Record<string, string> = {
+  FinTech: 'linear-gradient(102.32deg, #eef2ff, #c7d2fe)',      // Indigo light
+  Healthcare: 'linear-gradient(102.32deg, #f0fdf4, #bbf7d0)',   // Emerald light
+  'E-Commerce': 'linear-gradient(102.32deg, #fff7ed, #fed7aa)', // Orange light
+  Analytics: 'linear-gradient(102.32deg, #faf5ff, #e9d5ff)',    // Purple light
+};
+
+export default function ProjectCaseCard({ project }: ProjectCaseCardProps) {
+  const bgGradient = bgThemes[project.category] || 'linear-gradient(102.32deg, #f5f7fa, #c3cfe2)';
 
   return (
-    <article className={`rounded-2xl border p-6 md:p-8 ${theme.shell}`}>
-      <div className="grid gap-6 lg:grid-cols-[1.1fr_1fr] lg:items-stretch">
-        <div className="flex flex-col">
-          <div className={`flex items-center justify-between gap-4 border-b pb-5 ${theme.divider}`}>
-            <div className={`rounded-lg px-3 py-2 ${theme.logoChip}`}>
-              <Image
+    <div
+      className="flex flex-col lg:flex-row items-center justify-between gap-[12px] rounded-[8px] p-[24px] lg:p-[40px] min-h-[480px] w-full"
+      style={{
+        background: bgGradient,
+        opacity: 1,
+        transform: 'translateY(0px)',
+        transitionDuration: '0.5s',
+      }}
+    >
+      <div className="flex flex-col justify-between gap-12 w-full lg:w-[45%] h-full">
+        <div>
+          <div
+            className="flex items-center justify-between gap-4 mb-6 border-b border-[#00000015] pb-6"
+            style={{ opacity: 1, transitionDuration: '0.3s', transitionDelay: '0.2s' }}
+          >
+            <div style={{ position: 'relative' }}>
+              {/* Using a brightness filter to make light logos visible as highly readable dark grey silouhettes */}
+              <img
                 src={project.logo}
-                alt={`${project.title} logo`}
-                width={130}
-                height={34}
-                className="h-8 w-auto object-contain"
+                alt={`${project.category} logo`}
+                className="h-8 md:h-9 w-auto object-contain object-left"
+                style={{ filter: 'brightness(0) opacity(0.85)' }}
               />
             </div>
-            <span className={`rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.08em] ${theme.categoryChip}`}>
+            <label className="rounded-full bg-[#00000010] px-4 py-1.5 font-sans text-[11px] font-bold uppercase tracking-widest text-[#374151]">
               {project.category}
-            </span>
+            </label>
           </div>
-
-          <p className="mt-6 text-[22px] leading-[1.45] text-[#111827]">{project.summary}</p>
-
-          <div className="mt-6 flex flex-wrap gap-3">
+          <p
+            className="font-sans text-base leading-relaxed text-[#2b2a35] md:text-[17px] md:leading-[1.55]"
+            style={{ opacity: 1, transform: 'translateY(0px)', transitionDuration: '0.6s' }}
+          >
+            {project.summary}
+          </p>
+          <ul className="mt-8 flex flex-wrap gap-3 list-none font-sans">
             {project.tags.map((tag) => (
-              <span
+              <li
                 key={tag}
-                className={`rounded-md border px-4 py-2 text-sm font-medium ${theme.tag}`}
+                className="rounded bg-white/60 px-3.5 py-1.5 text-[14px] font-medium text-[#374151] shadow-[0_1px_2px_rgba(0,0,0,0.02)]"
+                style={{ opacity: 1, transform: 'translateY(0px)', transitionDuration: '0.7s' }}
               >
                 {tag}
-              </span>
+              </li>
             ))}
-          </div>
+          </ul>
+        </div>
 
+        <div
+          className="mt-12"
+          style={{ opacity: 1, transform: 'translateY(0px)', transitionDuration: '0.5s' }}
+        >
           <Link
             href={`/projects/${project.slug}`}
-            className={`mt-10 inline-flex w-fit items-center gap-2 rounded-md px-8 py-4 text-lg font-semibold text-white transition ${theme.cta}`}
+            className="inline-flex items-center gap-2 rounded-none bg-[#2b2a35] px-6 py-3.5 font-sans text-sm font-medium text-white transition hover:opacity-90 md:text-base"
           >
             View case study
-            <ArrowRight size={18} />
+            <CaseStudyArrowIcon />
           </Link>
         </div>
-
-        <div className={`relative min-h-[340px] overflow-hidden rounded-xl border ${theme.preview}`}>
-          <Image
-            src={project.previewImage}
-            alt={`${project.title} preview`}
-            fill
-            className="object-cover"
-          />
-        </div>
       </div>
-    </article>
+
+      <div className="relative w-full lg:w-[52%] shrink-0">
+        <span style={{ transform: 'translateX(0px)', opacity: 1, display: 'block' }}>
+          <div style={{ position: 'relative' }}>
+            <img
+              src={project.previewImage}
+              alt={`${project.title} preview`}
+              className="w-full h-auto object-cover rounded-lg"
+            />
+          </div>
+        </span>
+      </div>
+    </div>
   );
 }

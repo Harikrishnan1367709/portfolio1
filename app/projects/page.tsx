@@ -17,9 +17,9 @@ export default function ProjectsPage() {
 
       <section className="section-padding">
         <div className="container-custom">
-          <div className="space-y-6">
-            {PROJECT_CASE_STUDIES.map((project, index) => (
-              <ProjectCaseCard key={project.slug} project={project} index={index} />
+          <div className="space-y-16">
+            {PROJECT_CASE_STUDIES.map((project) => (
+              <ProjectCaseCard key={project.slug} project={project} />
             ))}
           </div>
         </div>

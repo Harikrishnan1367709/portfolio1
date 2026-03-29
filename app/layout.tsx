@@ -1,14 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Plus_Jakarta_Sans } from 'next/font/google';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import ScrollToTopButton from '@/components/ScrollToTopButton';
-
-const plusJakarta = Plus_Jakarta_Sans({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-});
 
 const localBusinessSchema = {
   '@context': 'https://schema.org',
@@ -70,7 +63,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="smooth-scroll">
-      <body className={plusJakarta.className}>
+      <body className="font-sans antialiased">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
@@ -78,7 +71,6 @@ export default function RootLayout({
         <Navbar />
         <main>{children}</main>
         <Footer />
-        <ScrollToTopButton />
       </body>
     </html>
   );

@@ -26,7 +26,7 @@ export const PROJECT_CASE_STUDIES: ProjectCaseStudy[] = [
     summary:
       'This project involved the design and development of a next-generation enterprise SaaS platform tailored for financial organizations that rely heavily on real-time data for decision-making.',
     logo: '/logo/revamp.png',
-    previewImage: '/projects/project1(1).png',
+    previewImage: '/projects/project1(4).png',
     tags: ['UI UX Design', 'React Js', 'Node Js'],
     sections: [
       {
@@ -194,7 +194,7 @@ export const PROJECT_CASE_STUDIES: ProjectCaseStudy[] = [
     summary:
       'High-performance digital commerce platform built for intelligent discovery, frictionless checkout, and secure, scalable transactions.',
     logo: '/logo/neotouch.png',
-    previewImage: '/projects/project3(1).png',
+    previewImage: '/projects/project3(2).png',
     tags: ['Next.js', 'Node.js', 'PostgreSQL', 'Redis', 'Stripe', 'AWS'],
     sections: [
       {

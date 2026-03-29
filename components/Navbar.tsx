@@ -42,11 +42,13 @@ const Navbar = () => {
   }, []);
 
   const menuItems = [
-    { name: 'Services', href: '/services' },
-    { name: 'Clients', href: '/clients' },
-    { name: 'Projects', href: '/projects' },
-    { name: 'About Us', href: '/about' },
-    { name: 'Careers', href: '/careers' },
+    { name: 'Services', href: '/services', green: false },
+    { name: 'Clients', href: '/clients', green: false },
+    { name: 'Projects', href: '/projects', green: false },
+    { name: 'About Us', href: '/about', green: false },
+    { name: 'Careers', href: '/careers', green: false },
+    { name: 'Blogs', href: '/blogs', green: false },
+    { name: 'Contact Us', href: '/contact', green: true },
   ];
 
   return (
@@ -111,9 +113,8 @@ const Navbar = () => {
                   width={52}
                   height={52}
                   priority
-                  className={`object-contain transition-all duration-300 ${
-                    isCompact ? 'h-8 w-8 md:h-9 md:w-9' : 'h-10 w-10 md:h-12 md:w-12'
-                  }`}
+                  className={`object-contain transition-all duration-300 ${isCompact ? 'h-8 w-8 md:h-9 md:w-9' : 'h-10 w-10 md:h-12 md:w-12'
+                    }`}
                 />
 
                 <motion.div
@@ -139,50 +140,46 @@ const Navbar = () => {
           </motion.div>
 
           <motion.div
-            className={`hidden lg:flex items-center transition-all duration-300 ${
-              isCompact ? 'lg:w-1/3 justify-center gap-8' : 'space-x-8'
-            }`}
+            className="hidden lg:flex items-center transition-all duration-300 justify-between w-full"
+            style={{ gap: '12px', maxWidth: '610px' }}
             transition={mergeTransition}
           >
             {menuItems.map((item) => {
               const isActive = pathname === item.href || pathname.startsWith(item.href + '/');
+              const isGreen = item.green;
               return (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`text-[#FFFFFF] hover:text-[#B3B3B3] transition-colors duration-300 relative group font-medium flex flex-col items-center ${
-                    isCompact ? 'text-sm whitespace-nowrap' : 'text-sm'
-                  }`}
+                  style={{
+                    fontWeight: 400,
+                    fontSize: '16px',
+                    lineHeight: '24px',
+                    color: isGreen
+                      ? '#00D084'
+                      : isActive
+                        ? '#fafbfc'
+                        : '#fafbfc',
+                  }}
+                  className={`transition-colors duration-300 relative group flex flex-col items-center ${isCompact ? 'whitespace-nowrap' : ''
+                    } ${isGreen ? 'hover:text-[#00b874]' : 'hover:text-[rgb(200,200,200)]'
+                    }`}
                 >
                   {item.name}
                   {isActive && (
                     <motion.div
-                      className="w-1 h-1 bg-white rounded-full mt-1"
+                      className={`w-1 h-1 rounded-full mt-1 ${isGreen ? 'bg-[#00D084]' : 'bg-white'
+                        }`}
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       transition={{ type: 'spring', stiffness: 200, damping: 20 }}
                     />
                   )}
-                  <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-white transition-all duration-300 group-hover:w-full"></span>
                 </Link>
               );
             })}
           </motion.div>
 
-          <motion.div
-            className={`hidden lg:flex ${isCompact ? 'lg:w-1/3 justify-end' : ''}`}
-            animate={{ scale: isCompact ? 0.94 : 1 }}
-            transition={mergeTransition}
-          >
-            <Link
-              href="/contact"
-              className={`inline-flex items-center justify-center bg-white text-black rounded-lg hover:bg-[#E5E5E5] transition-all duration-300 font-medium ${
-                isCompact ? 'px-4 py-2 text-sm' : 'px-6 py-3 text-sm'
-              }`}
-            >
-              Start a Project
-            </Link>
-          </motion.div>
 
           <button
             className="lg:hidden text-white"
@@ -205,17 +202,30 @@ const Navbar = () => {
             <div className="container-custom py-6 space-y-4">
               {menuItems.map((item) => {
                 const isActive = pathname === item.href || pathname.startsWith(item.href + '/');
+                const isGreen = item.green;
                 return (
                   <Link
                     key={item.name}
                     href={item.href}
-                    className="flex items-center text-white hover:text-[#B3B3B3] transition-colors duration-300 py-2"
+                    style={{
+                      fontWeight: 400,
+                      fontSize: '16px',
+                      lineHeight: '24px',
+                      color: isGreen
+                        ? '#00D084'
+                        : isActive
+                          ? '#fafbfc'
+                          : '#fafbfc',
+                    }}
+                    className={`flex items-center transition-colors duration-300 py-2 ${isGreen ? 'hover:text-[#00b874]' : 'hover:text-[rgb(200,200,200)]'
+                      }`}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {item.name}
                     {isActive && (
                       <motion.div
-                        className="w-1 h-1 bg-white rounded-full ml-2"
+                        className={`w-1 h-1 rounded-full ml-2 ${isGreen ? 'bg-[#00D084]' : 'bg-white'
+                          }`}
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
                         transition={{ type: 'spring', stiffness: 200, damping: 20 }}
@@ -224,13 +234,6 @@ const Navbar = () => {
                   </Link>
                 );
               })}
-              <Link
-                href="/contact"
-                className="block w-full text-center bg-white text-black px-6 py-3 rounded-lg hover:bg-[#E5E5E5] transition-all duration-300 mt-4"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Start a Project
-              </Link>
             </div>
           </motion.div>
         )}
