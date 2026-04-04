@@ -1,31 +1,27 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Star, Quote } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const Testimonials = () => {
   const testimonials = [
     {
-      quote: 'Revamppayment gateway integration (trust) helped strengthen our payment experience and improve user confidence across key transaction journeys.',
+      quote: "Revamppayment gateway integration (trust) helped strengthen our payment experience and improve user confidence across key transaction journeys.",
       name: 'Revamppayment gateway integration (trust)',
       position: 'Client',
-      company: 'Revamppayment gateway integration (trust)',
-      rating: 5,
+      logo: '/logo/revamp.png'
     },
     {
-      quote: 'ALPHASPECTS-CRM gave our team a more organized customer workflow, and the delivery quality was strong from planning to handoff.',
+      quote: "ALPHASPECTS-CRM gave our team a more organized customer workflow, and the delivery quality was strong from planning to handoff.",
       name: 'ALPHASPECTS-CRM',
       position: 'Client',
-      company: 'ALPHASPECTS-CRM',
-      rating: 5,
+      logo: '/logo/alphaspects.png'
     },
     {
-      quote: 'NEOTOUCH delivered a clean and reliable implementation, and the final product experience was smooth for both internal teams and end users.',
+      quote: "NEOTOUCH delivered a clean and reliable implementation, and the final product experience was smooth for both internal teams and end users.",
       name: 'NEOTOUCH',
       position: 'Client',
-      company: 'NEOTOUCH',
-      rating: 5,
+      logo: '/logo/neotouch.png'
     },
   ];
 
@@ -34,111 +30,132 @@ const Testimonials = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-    }, 5000);
-
+    }, 6000);
     return () => clearInterval(timer);
   }, [testimonials.length]);
 
-  const handlePrevious = () => {
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
-
-  const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+  const getOffset = (index: number) => {
+    let offset = index - currentIndex;
+    const len = testimonials.length;
+    // Infinitely wrap properties around the center array
+    if (offset < -Math.floor(len / 2)) offset += len;
+    if (offset > Math.floor(len / 2)) offset -= len;
+    return offset;
   };
 
   return (
-    <section className="section-padding bg-[#0B0B0B]">
-      <div className="container-custom">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-[32px] md:text-[48px] font-bold text-white mb-4">
-            What Our Clients Say
-          </h2>
-          <p className="text-[#B3B3B3] text-lg max-w-2xl mx-auto">
-            Testimonials from our valued partners and clients
-          </p>
-        </motion.div>
+    <section className="py-16 md:py-[96px] overflow-x-hidden font-sans bg-[#0e0e10]">
+      <div className="max-w-[1148px] mx-auto px-4 sm:px-8">
+        
+        {/* Heading */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 lg:mb-24 gap-6">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <h2 className="font-sans text-[32px] font-medium leading-[48px] not-italic tracking-tight text-[#FAFBFC]">
+              Our Hall of Fame
+            </h2>
+          </motion.div>
+          <motion.a
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            target="_blank" 
+            rel="noopener noreferrer" 
+            href="https://clutch.co/profile/sketch-brahma-technologies#highlights"
+            className="hover:scale-105 transition-transform duration-300 block pb-2"
+          >
+            <div className="relative h-[32px] md:h-[42px] w-[140px] md:w-[180px]">
+              <img 
+                src="https://sb-production-images.s3.ap-southeast-1.amazonaws.com/assets/images/home/reviews.svg" 
+                alt="Clutch Reviews" 
+                className="w-full h-full object-contain md:object-right"
+              />
+            </div>
+          </motion.a>
+        </div>
 
-        <div className="max-w-4xl mx-auto">
-          <div className="relative">
-            <AnimatePresence mode="wait">
+        {/* Carousel Slider Area */}
+        <div className="relative w-full h-[280px] md:h-[300px] flex items-center justify-center">
+          {testimonials.map((test, index) => {
+            const offset = getOffset(index);
+            const isCenter = offset === 0;
+
+            return (
               <motion.div
-                key={currentIndex}
-                initial={{ opacity: 0, x: 100 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -100 }}
-                transition={{ duration: 0.5 }}
-                className="bg-[#161616] border border-[#222222] rounded-2xl p-8 md:p-12"
+                key={index}
+                animate={{
+                  x: `${offset * 105}%`, // Shifts exactly by card width + 5% gap
+                  scale: isCenter ? 1 : 0.9,
+                  opacity: Math.abs(offset) > 1 ? 0 : isCenter ? 1 : 0.4,
+                  zIndex: isCenter ? 10 : 0
+                }}
+                transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
+                className="absolute top-0 w-[85%] md:w-[65%] max-w-[966px] border border-[#292b2f] rounded-[12px] p-6 md:p-8 h-[240px] md:h-[280px] flex flex-col justify-between bg-[#0e0e10] cursor-pointer"
+                style={{ left: 0, right: 0, margin: 'auto' }}
+                onClick={() => setCurrentIndex(index)}
               >
-                <Quote className="text-white mb-6" size={48} />
-
-                <div className="flex mb-6">
-                  {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
-                    <Star key={i} className="text-white fill-white" size={20} />
-                  ))}
-                </div>
-
-                <p className="text-white text-xl md:text-2xl leading-relaxed mb-8 italic">
-                  "{testimonials[currentIndex].quote}"
+                {/* Quote */}
+                <p className="text-[#FAFBFC] text-[16px] md:text-[18px] leading-[1.8] font-normal tracking-wide font-sans text-pretty flex-grow">
+                  {test.quote}
                 </p>
-
-                <div className="flex items-center space-x-4">
-                  <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center">
-                    <span className="text-black font-bold text-xl">
-                      {testimonials[currentIndex].name.split(' ').map(n => n[0]).join('')}
-                    </span>
-                  </div>
-                  <div>
-                    <h4 className="text-white font-semibold text-lg">
-                      {testimonials[currentIndex].name}
-                    </h4>
-                    <p className="text-[#B3B3B3]">
-                      {testimonials[currentIndex].position} at {testimonials[currentIndex].company}
-                    </p>
-                  </div>
+                
+                {/* Author */}
+                <div className="mt-auto">
+                  <h2 className="text-[#FAFBFC] text-[15px] md:text-[16px] font-medium mb-1 font-sans">
+                    {test.name}
+                  </h2>
+                  <label className="text-[#8a8a8a] text-[12px] md:text-[13px] font-normal tracking-wide uppercase block font-sans">
+                    {test.position}
+                  </label>
                 </div>
               </motion.div>
-            </AnimatePresence>
-
-            <div className="flex items-center justify-center mt-8 space-x-4">
-              <button
-                onClick={handlePrevious}
-                className="w-12 h-12 flex items-center justify-center rounded-full border border-[#222222] text-white hover:bg-white hover:text-black transition-all duration-300"
-                aria-label="Previous testimonial"
-              >
-                <ChevronLeft size={20} />
-              </button>
-
-              <div className="flex space-x-2">
-                {testimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentIndex(index)}
-                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                      index === currentIndex ? 'bg-white w-8' : 'bg-[#222222]'
-                    }`}
-                    aria-label={`Go to testimonial ${index + 1}`}
-                  />
-                ))}
-              </div>
-
-              <button
-                onClick={handleNext}
-                className="w-12 h-12 flex items-center justify-center rounded-full border border-[#222222] text-white hover:bg-white hover:text-black transition-all duration-300"
-                aria-label="Next testimonial"
-              >
-                <ChevronRight size={20} />
-              </button>
-            </div>
-          </div>
+            );
+          })}
         </div>
+
+        {/* Pagination Dots (Logos) */}
+        <div className="mt-16 md:mt-24 flex gap-6 md:gap-12 items-center border-[#292b2f] border-t pt-8 overflow-x-auto hide-scrollbar">
+          {testimonials.map((test, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentIndex(index)}
+              className={`relative flex items-center justify-center p-2 transition-all duration-300 shrink-0
+                ${index === currentIndex ? 'opacity-100 grayscale-0' : 'opacity-40 grayscale hover:opacity-100 hover:grayscale-0'}
+              `}
+              aria-label={`Go to testimonial ${index + 1}`}
+            >
+              <img 
+                src={test.logo} 
+                alt={test.name} 
+                className="h-6 md:h-8 object-contain"
+              />
+              {/* Active Indicator Line */}
+              {index === currentIndex && (
+                <motion.div 
+                  layoutId="activeTabIndicator"
+                  className="absolute -top-[33px] left-0 right-0 h-[2px] bg-[#FAFBFC]" 
+                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                />
+              )}
+            </button>
+          ))}
+        </div>
+
       </div>
+      <style jsx>{`
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+        .hide-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
     </section>
   );
 };
